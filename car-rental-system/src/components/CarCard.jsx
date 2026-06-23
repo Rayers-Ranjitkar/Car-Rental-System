@@ -1,4 +1,4 @@
-export default function CarCard() {
+export default function CarCard({model,type,rate}) {
   return (
     <div className="bg-[#FFF9D2] rounded-xl shadow-md p-4 w-80">
       {/* Image Placeholder */}
@@ -11,14 +11,14 @@ export default function CarCard() {
         Available
       </span>
 
-      {/* Model */}
-      <h3 className="mt-3 text-xl font-bold">Toyota Corolla</h3>
+      {/* Model */} 
+      <h3 className="mt-3 text-xl font-bold">{model}</h3>
 
       {/* Type */}
-      <p className="text-gray-600">Sedan</p>
+      <p className="text-gray-600">{type}</p>
 
       {/* Rate */}
-      <p className="mt-2 font-semibold">$50/day</p>
+      <p className="mt-2 font-semibold">${rate}/day</p> {/* inside {} we write JS as return bhitra matrai HTML huncha so, how to write JS , like this ok  */}
 
       {/* Button */}
       <button className="mt-4 w-full bg-[#8CC0EB] hover:bg-[#BFDDF0] py-2 rounded-lg font-medium">
