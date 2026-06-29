@@ -1,15 +1,17 @@
-export default function CarCard({model,type,rate}) {
+export default function CarCard({model,type,rate,available}) {
   return (
-    <div className="bg-[#FFF9D2] rounded-xl shadow-md p-4 w-80">
+    <div className="bg-[#FFF9D2] rounded-xl shadow-md p-4 max-w-sm w-full">
       {/* Image Placeholder */}
       <div className="bg-[#BFDDF0] h-40 rounded-lg flex items-center justify-center">
         Car Image
       </div>
 
       {/* Availability Badge */}
-      <span className="inline-block mt-3 px-3 py-1 rounded-full bg-[#FFEBCC] text-sm font-medium">
-        Available
-      </span>
+        <span className={`inline-block mt-3 px-3 py-1 rounded-full text-sm font-medium text-white ${
+            available ? "bg-green-600" : "bg-red-600"}`}
+        >
+        {available ? "Available" : "Rented"}
+        </span>
 
       {/* Model */} 
       <h3 className="mt-3 text-xl font-bold">{model}</h3>

@@ -1,17 +1,19 @@
-import CarCard from "./components/carCard"
+import CarGrid from "./components/CarGrid"
+import Navbar from "./components/Navbar"
 
 export default function App(){ //default = multiple export huda pani default ma yehe return garedincha 
   //return <Title /> //This calls the function named as title 
   return  ( 
   <div> 
-    <Title /> 
-    <CarCard />
+    {/* <Title />  */}
+    <Navbar />
+    <CarGrid />
   </div>
   )
 }
 
 
-
+/* test function */
 function Title(){
   return(
 
