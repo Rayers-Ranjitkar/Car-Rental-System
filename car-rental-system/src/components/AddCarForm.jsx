@@ -1,13 +1,13 @@
 import { useState } from "react"; /* bahira bata import gareko so inside {} the usestate*/
 
-export default function AddCard({ onAdd }) {
+export default function AddCardForm({ onAdd }) {
   const [model, setModel] = useState(""); /* Multiple state variable is used, can make an array and do as well haita */
   const [type, setType] = useState("");
   const [rate, setRate] = useState("");
   const [available, setAvailable] = useState(true);
 
   /* Function addCar */
-  
+
   function handleSubmit(e) {
     e.preventDefault();
 
