@@ -1,3 +1,5 @@
+
+
 export default function CarCard({model,type,rate,available}) {
   return (
     <div className="bg-[#FFF9D2] rounded-xl shadow-md p-4 max-w-sm w-full">

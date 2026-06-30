@@ -3,6 +3,8 @@ import AddNewButton from "./AddNewButton.jsx";
 import { useState } from "react";
 import AddCardForm from "./AddCarForm.jsx";
 
+import {useNavigate} from "react-router-dom"
+
 export default function CarGrid() {
   /* Make car array and put them in another file say cars.jsx and then use map to add that when the button is clicked */
   const [isClicked, setIsClicked] = useState(false);
@@ -16,10 +18,13 @@ export default function CarGrid() {
     { model: "Tesla Model 3", type: "Electric", rate: 120, available: true },
   ]);
 
+  /* Navigate */
+    const navigate = useNavigate();
+
   /* Function to add cars */
   function addCar(newCar) {
     setCars([...cars, newCar]);
-    setIsClicked(false); // optional: close form after adding
+    setIsClicked(false); // closing form after adding
   }
 
   return (
@@ -28,7 +33,8 @@ export default function CarGrid() {
       <AddNewButton
         data="Add New Car"
         onClick={() => {
-          setIsClicked(true);
+          /* setIsClicked(true); */
+          navigate("/add"); /* When we do this the button isn't working , why, cauz the state isn't lifted, meaning in app.jsx there is no imports required to run the /add button aka array ni pass bhayeko xaina and WHAT MORE?  */
         }}
       />{" "}
       {/* oh so, yo setIsClicked bhanney state function we are sending from child to the parent, to change it's state in the parent button file when the user clicks it */}
@@ -59,7 +65,7 @@ export default function CarGrid() {
         ))}
       </div>
 
-      
+
     </div>
   );
 }
