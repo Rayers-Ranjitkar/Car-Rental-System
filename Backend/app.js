@@ -44,9 +44,9 @@ app.post("/cars",(req,res)=>{ //req object -> client ko form bata data aayerako 
 
 //Server has been setup 
 app.listen(PORT, () =>{
-    console.log(`Our is running on port ${PORT}.`);
+    console.log(`Our server is running on port ${PORT}.`);
 } ); //app.listen(PORT, arrow func ma changes to be made)
 
 //To run this: node app.js in terminal 
 //But, this doesn't work live we need to stop and restart the server again -> so for that nodemon is the solution (when code change isn't listening)
-
+//aba post garesakesi, feri add bhayo ki bhayena bhanera hernu ko lagi we can't see in file the changes so we need to see in post man as well
