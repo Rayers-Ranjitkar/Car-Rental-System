@@ -63,6 +63,10 @@ import carRoutes from "./routes/carRoutes.js";
 app.use("/api", carRoutes); //"If the URL starts with /api, let carRoutes handle it." --> //Use this middleware or router whenever a request matches this path. If a request starts with /api > Pass it to the carRoutes router.
 // Now these URLs become: Get /api/cars and Post /api/cars.
 
+//Registering new API for bookings
+import bookingRoutes from "./routes/bookingRoutes.js";
+app.use("/api", bookingRoutes);
+
 
 // Starting server on port 4000
 const PORT = 4000;
