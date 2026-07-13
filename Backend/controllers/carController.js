@@ -8,7 +8,7 @@ export function getCars(req, res) {
 
 //POST
 export function addCar(req, res) {
-  const car = req.body;
+  const car = req.body; //Nothing is checked in here meaning it's accepting gibberish data as well without proper structure so added a middleware in routes (req,yeha bich ma validators, response)
 
   CarModel.add(car);
 

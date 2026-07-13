@@ -58,8 +58,10 @@ const app = express(); //app.use() = app.use() tells Express: "For every incomin
 
 app.use(express.json());//Without this middleware, req.body will be undefined when you send JSON from Postman. --->  //"Before any routes run, if the request contains JSON, read it and convert it into a JavaScript object." //wrote in app.js cause package.json probably contains something like: "scripts": "dev": "nodemon app.js" ... Node begins executing app.js from top to bottom.
 
-//Using CORS
+//Using CORS ()
+import cors from "cors";
 app.use(cors());
+
 import carRoutes from "./routes/carRoutes.js";
 
 app.use("/api", carRoutes); //"If the URL starts with /api, let carRoutes handle it." --> //Use this middleware or router whenever a request matches this path. If a request starts with /api > Pass it to the carRoutes router.
@@ -69,6 +71,16 @@ app.use("/api", carRoutes); //"If the URL starts with /api, let carRoutes handle
 import bookingRoutes from "./routes/bookingRoutes.js";
 app.use("/api", bookingRoutes);
 
+
+
+
+
+
+//Connecting DB before starting server
+import dbConnection from "../Backend/config/db.js"; 
+
+
+await dbConnection(); //connecting to DB
 
 // Starting server on port 4000
 //const PORT = 4000; //Let's put this in .env for checking
