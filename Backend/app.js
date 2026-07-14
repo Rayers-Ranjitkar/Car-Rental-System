@@ -74,8 +74,6 @@ app.use("/api", bookingRoutes);
 
 
 
-
-
 //Connecting DB before starting server
 import dbConnection from "../Backend/config/db.js"; 
 
