@@ -29,5 +29,10 @@ export async function update(id, updatedCar) {
   return car.findByIdAndUpdate(id, updatedCar, {
     new: true,
     runValidators: true,
-  })
+  });
+}
+
+// Delete
+export async function remove(id) {
+  return car.findByIdAndDelete(id);
 }

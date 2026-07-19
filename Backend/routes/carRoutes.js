@@ -11,4 +11,8 @@ router.get("/cars", carController.getCars);
 //router.post(request, response); //so middleware yo bich ma huncha 
 router.post("/cars", carRules, handleCarValidation, carController.addCar);
 
+//update and delete
+router.put("/cars/:id", carRules, handleCarValidation, carController.updateCar);
+router.delete("/cars/:id", carController.deleteCar);
+
 export default router;
