@@ -26,7 +26,7 @@ export async function add(newCar) {
 
 //Update
 export async function update(id, updatedCar) {
-  return car.findByIdAndUpdate(id, updatedCar, {
+  return car.findByIdAndUpdate(id, updatedCar, { //this findByIdAndUpdate is default js method i guess
     new: true,
     runValidators: true,
   });

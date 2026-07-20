@@ -3,6 +3,7 @@ import CarGrid from "./components/CarGrid"
 import Navbar from "./components/Navbar"
 import {BrowserRouter, Routes, Route} from  "react-router-dom" //External package bata aauney bhayera we write those in { } 
 import AddCarForm from "./components/AddCarForm" 
+import { getCars, addNewCar  } from "./api/carApi.js"
 
 // default image 
 const DEFAULT_CAR_IMAGE = "https://images.unsplash.com/photo-1559038465-e0ca2910a5b1?w=600&q=80&auto=format&fit=crop"
@@ -10,13 +11,42 @@ const DEFAULT_CAR_IMAGE = "https://images.unsplash.com/photo-1559038465-e0ca2910
 export default function App(){ //default = multiple export huda pani default ma yehe return garedincha 
 
   // Week 2: state lifted up from CarGrid.jsx to here, state chai common parent (App) ma nai hunu parxa
-  const [cars, setCars] = useState([
-    { id: 1, model: "Toyota Corolla", type: "Sedan", rate: 50, available: true, image: "https://images.unsplash.com/photo-1559385988-439b04de16f8?w=600&q=80&auto=format&fit=crop" },
-    { id: 2, model: "Honda Civic", type: "Sedan", rate: 55, available: false, image: "https://images.unsplash.com/photo-1561823528-057f4774dd3e?w=600&q=80&auto=format&fit=crop" },
-    { id: 3, model: "Hyundai Creta", type: "SUV", rate: 70, available: true, image: "https://images.unsplash.com/photo-1559038465-e0ca2910a5b1?w=600&q=80&auto=format&fit=crop" },
-    { id: 4, model: "Kia Seltos", type: "SUV", rate: 75, available: false, image: "https://images.unsplash.com/photo-1633619946656-159bb0448e59?w=600&q=80&auto=format&fit=crop" },
-    { id: 5, model: "Tesla Model 3", type: "Electric", rate: 120, available: true, image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=80&auto=format&fit=crop" },
-  ]);
+  // const [cars, setCars] = useState([
+  //   { id: 1, model: "Toyota Corolla", type: "Sedan", rate: 50, available: true, image: "https://images.unsplash.com/photo-1559385988-439b04de16f8?w=600&q=80&auto=format&fit=crop" },
+  //   { id: 2, model: "Honda Civic", type: "Sedan", rate: 55, available: false, image: "https://images.unsplash.com/photo-1561823528-057f4774dd3e?w=600&q=80&auto=format&fit=crop" },
+  //   { id: 3, model: "Hyundai Creta", type: "SUV", rate: 70, available: true, image: "https://images.unsplash.com/photo-1559038465-e0ca2910a5b1?w=600&q=80&auto=format&fit=crop" },
+  //   { id: 4, model: "Kia Seltos", type: "SUV", rate: 75, available: false, image: "https://images.unsplash.com/photo-1633619946656-159bb0448e59?w=600&q=80&auto=format&fit=crop" },
+  //   { id: 5, model: "Tesla Model 3", type: "Electric", rate: 120, available: true, image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=80&auto=format&fit=crop" },
+  // ]);
+  //(last week ma removed garey yo and then connected frontend with backend)
+
+
+  //connecting frontend to backend (last week)
+  //import {getCars, addCar} from "../src/api/carApi.js" //this import should be on top
+
+  //const carData = getCars(); //yo garna mildaina as external event ho api call so , usestate() ley dhandaina 
+  //const [car,setCars] = useState([getCars]);//yo garna mildaina as external event ho api call so , usestate() ley dhandaina 
+
+  const [cars,setCars] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(()=>{
+    async function loadCars(){
+        try{
+          const response = await getCars(); //here in response many thing comes so we need data
+          setCars(response.data);
+
+        }catch(error){ //error kahele aaucha, kahele aaudaina + UI refresh garcha so state banaunai paryo error ko lagi 
+            setErrors((prev)=>[...prev,error]); //learn about this prev
+        }finally{
+            setIsLoading(false);
+        }
+    }
+    loadCars();
+  },[]); //UseState ley matrai sakdaina as external event ho, external events ko lagi useEffect chahencha hamilai 
+  
+//...............................
 
   // bookings array with booking details (dates, total cost) 
   const [bookings, setBookings] = useState([]);
@@ -59,10 +89,22 @@ function addCar(newCar) {
     setBookings(bookings.filter((b) => b.carId !== carId));
   }
 
+
+
+
   return  ( 
   <div className="min-h-screen bg-[#F5F7FA]"> 
     <BrowserRouter> {/* The thing we had wrapped in browser router, we can access it using /Navbar or /CarGrid, whole app lai  */}
+    {/* If error exists, show error in here and not the data */}
       <Navbar />
+      {isLoading && (
+        <p className="mx-auto max-w-7xl px-6 py-4">Loading cars...</p>
+      )}
+      {errors.length > 0 && (
+        <p className="mx-auto max-w-7xl px-6 py-4 text-red-700">
+          Could not load cars: {errors[0].message}
+        </p>
+      )}
       <Routes> {/* CarGrid is one of my page so each pages lai chahi we wrap in routes so that can access using /carGrid, multiple page lai wrap   */}
         {/*Since, cars and bookings state is in App.jsx, so sending the props */}
         <Route path="/" element={ <CarGrid cars={cars} onBook={bookCar} onCancel={cancelBooking} /> }></Route> 
