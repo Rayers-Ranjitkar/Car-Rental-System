@@ -10,13 +10,13 @@ const userSchema = mongoose.Schema({
 {timestamps: true }
 );
 
-const user = moongose.model('UserModel',userSchema,'userTable'); // mongoose.model(modelName, ourSchema, collectionAkaTableName')
+const User = moongose.model('UserModel',userSchema,'userTable'); // mongoose.model(modelName, ourSchema, collectionAkaTableName')
 
 //User create hunu bhanda aagadi nai hash hunu paryo so we use 'Pre' function given by moongoose
-user.pre('save', ()=>{
+User.pre('save', ()=>{
     if(this.modified('password') ){
         this.password = bcrypt.hashSync(this.password, 10); //this is 10 times hashing
     }
 })
 
-export default user;
+export default User;

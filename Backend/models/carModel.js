@@ -9,7 +9,7 @@ import car from "../data/car.js"; //This was the model made from schema to uploa
 
 export async function getAll() {
   // return cars;
-  return car.find(); //using carModel ko methods
+  return car.find(); //using carModel ko methods (bhanda pani this is mongoose ko models ho so , npm moongose ma gayera herda huncha)
 }
 
 export async function add(newCar) {

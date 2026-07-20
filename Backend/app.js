@@ -63,9 +63,11 @@ import cors from "cors";
 app.use(cors());
 
 import carRoutes from "./routes/carRoutes.js";
+import authRoutes from "./routes/authRoutes.js" //added this rn 
 
 app.use("/api", carRoutes); //"If the URL starts with /api, let carRoutes handle it." --> //Use this middleware or router whenever a request matches this path. If a request starts with /api > Pass it to the carRoutes router.
 // Now these URLs become: Get /api/cars and Post /api/cars.
+app.use("/auth",authRoutes); // '/auth/user' huda kheri aba chalyo (registering in app.js)
 
 //Registering new API for bookings
 import bookingRoutes from "./routes/bookingRoutes.js";
