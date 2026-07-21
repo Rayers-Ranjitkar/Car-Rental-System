@@ -8,4 +8,9 @@ export default defineConfig({
     tailwindcss()
   ],
 
+  server: { //so that cors doesn't intercept 
+    proxy: {
+      "/api": "http://localhost:4000/api", //this is the port of our backend server.
+    }
+  }
 })
