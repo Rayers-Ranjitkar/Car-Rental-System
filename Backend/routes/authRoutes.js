@@ -1,11 +1,19 @@
-import * as  AuthController from '../controllers/authControllers.js'
+import * as  AuthController from '../controllers/authController.js'
 
 import { Router } from 'express';
 
 const router = Router();
 
-router.post('/register',AuthController.Register);
-router.post('/login',AuthController.Login);
+console.log("Auth routes loaded");
+
+//test route
+router.get("/test", (req, res) => {
+    res.send("Auth route is working");
+});
+
+router.post('/register',AuthController.registeredUser);
+// router.post('/login',AuthController.Login);
 
 
-export default AuthController
+//export default authControlelr; //no we export router from all routes hai
+export default router;
